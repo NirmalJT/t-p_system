@@ -11,41 +11,15 @@ __pycache__/
 # Environment Variables
 .env
 
-# Flask Instance
-instance/
 
 # Uploaded Files
 uploads/
 
-# VS Code
-.vscode/
 
-# macOS
-.DS_Store
 
-# Windows
-Thumbs.db
 
-# SQL Lite (if used)
-*.db
-*.sqlite3
 
-# Logs
-*.log
 
-# Pytest
-.pytest_cache/
 
-# Migrations cache
-*.orig
 
-# Coverage
-htmlcov/
-.coverage
 
-# Build files
-dist/
-build/
-
-# Temporary files
-*.tmp

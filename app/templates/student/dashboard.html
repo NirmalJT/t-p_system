@@ -1,0 +1,62 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}Student Dashboard{% endblock %}
+{% block page_title %}Student Dashboard{% endblock %}
+{% block crumb %}Student Dashboard{% endblock %}
+{% block sidebar %}{% include "student/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="metric-card p-3 h-100">
+            <div class="d-flex justify-content-between align-items-start">
+                <div><p class="text-muted mb-1">Unread Notifications</p><h2 data-counter="{{ unread }}">0</h2></div>
+                <span class="metric-icon"><i class="bi bi-bell"></i></span>
+            </div>
+            <a href="{{ url_for('student.notifications') }}" class="small fw-bold text-decoration-none">View notifications</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="metric-card p-3 h-100">
+            <div class="d-flex justify-content-between align-items-start">
+                <div><p class="text-muted mb-1">Resume Status</p><h2>{{ "Ready" if current_user.student_profile.resume_filename else "Pending" }}</h2></div>
+                <span class="metric-icon"><i class="bi bi-file-earmark-pdf"></i></span>
+            </div>
+            <a href="{{ url_for('student.upload_resume') }}" class="small fw-bold text-decoration-none">Upload or replace resume</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="metric-card p-3 h-100">
+            <div class="d-flex justify-content-between align-items-start">
+                <div><p class="text-muted mb-1">Placement Status</p><h2>{{ "Placed" if current_user.student_profile.is_placed else "Open" }}</h2></div>
+                <span class="metric-icon"><i class="bi bi-award"></i></span>
+            </div>
+            <a href="{{ url_for('student.drives') }}" class="small fw-bold text-decoration-none">Browse drives</a>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-8">
+        <div class="content-panel h-100">
+            <span class="section-eyebrow">Placement Readiness</span>
+            <h2 class="h4 mt-2">Welcome, {{ current_user.student_profile.full_name }}</h2>
+            <div class="row g-3 mt-2">
+                <div class="col-md-4"><div class="portal-card p-3 h-100"><i class="bi bi-person-check text-primary h3"></i><h3 class="h6">Profile</h3><p class="small text-muted mb-0">Keep CGPA, phone, and department updated.</p></div></div>
+                <div class="col-md-4"><div class="portal-card p-3 h-100"><i class="bi bi-file-earmark-arrow-up text-primary h3"></i><h3 class="h6">Resume</h3><p class="small text-muted mb-0">Upload a clean PDF resume before applying.</p></div></div>
+                <div class="col-md-4"><div class="portal-card p-3 h-100"><i class="bi bi-send-check text-primary h3"></i><h3 class="h6">Applications</h3><p class="small text-muted mb-0">Apply only to eligible open placement drives.</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="content-panel h-100">
+            <span class="section-eyebrow">Quick Actions</span>
+            <div class="d-grid gap-2 mt-3">
+                <a class="btn btn-primary" href="{{ url_for('student.drives') }}"><i class="bi bi-building me-2"></i>View Drives</a>
+                <a class="btn btn-soft" href="{{ url_for('student.applications') }}"><i class="bi bi-send me-2"></i>My Applications</a>
+                <a class="btn btn-soft" href="{{ url_for('student.my_interviews') }}"><i class="bi bi-calendar-check me-2"></i>Interview Schedule</a>
+                <a class="btn btn-soft" href="{{ url_for('student.profile') }}"><i class="bi bi-person-badge me-2"></i>Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

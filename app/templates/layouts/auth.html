@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+{% include "components/topbar.html" %}
+<main class="auth-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="{% block auth_col %}col-md-8 col-lg-5{% endblock %}">
+                {% include "layouts/flash.html" %}
+                {% block auth_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</main>
+{% include "components/footer.html" %}
+{% endblock %}

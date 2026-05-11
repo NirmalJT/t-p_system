@@ -1,0 +1,49 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}Reports{% endblock %}
+{% block page_title %}Placement Reports & Analytics{% endblock %}
+{% block crumb %}Reports{% endblock %}
+{% block sidebar %}{% include "admin/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+    <div class="col-md-4"><div class="metric-card p-3"><p class="text-muted mb-1">Total Students</p><h2 data-counter="{{ total_students }}">0</h2></div></div>
+    <div class="col-md-4"><div class="metric-card p-3"><p class="text-muted mb-1">Placed Students</p><h2 data-counter="{{ selected_students }}">0</h2></div></div>
+    <div class="col-md-4"><div class="metric-card p-3"><p class="text-muted mb-1">Placement Percentage</p><h2 data-counter="{{ placement_percentage }}" data-suffix="%">0%</h2></div></div>
+</div>
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="content-panel">
+            <h2 class="h5">Department-wise Placements</h2>
+            <div class="table-responsive mt-3">
+                <table class="table table-hover mb-0" data-sortable>
+                    <thead><tr><th>Department</th><th>Selected Students</th></tr></thead>
+                    <tbody>
+                    {% for dept, count in department_report %}
+                        <tr><td class="fw-bold">{{ dept }}</td><td>{{ count }}</td></tr>
+                    {% else %}
+                        <tr><td colspan="2">{% set title = "No department data" %}{% set message = "Selected student data will appear here." %}{% set icon = "bi-diagram-3" %}{% set cta_url = None %}{% set cta_label = None %}{% include "components/empty_state.html" %}</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="content-panel">
+            <h2 class="h5">Company-wise Placements</h2>
+            <div class="table-responsive mt-3">
+                <table class="table table-hover mb-0" data-sortable>
+                    <thead><tr><th>Company</th><th>Selected Students</th></tr></thead>
+                    <tbody>
+                    {% for company, count in company_report %}
+                        <tr><td class="fw-bold">{{ company }}</td><td>{{ count }}</td></tr>
+                    {% else %}
+                        <tr><td colspan="2">{% set title = "No company data" %}{% set message = "Company placement outcomes will appear here." %}{% set icon = "bi-building" %}{% set cta_url = None %}{% set cta_label = None %}{% include "components/empty_state.html" %}</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

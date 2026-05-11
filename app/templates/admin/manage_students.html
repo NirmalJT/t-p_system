@@ -1,0 +1,34 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}Manage Students{% endblock %}
+{% block page_title %}Manage Students{% endblock %}
+{% block crumb %}Students{% endblock %}
+{% block sidebar %}{% include "admin/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="content-panel">
+    <div class="table-tools">
+        <div><h2 class="h5 mb-1">Student Directory</h2><p class="text-muted mb-0">Search and review student placement readiness.</p></div>
+        <div class="input-group" style="max-width: 340px;"><span class="input-group-text"><i class="bi bi-search"></i></span><input class="form-control" type="search" placeholder="Search students" data-table-search="#studentsTable"></div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" id="studentsTable" data-sortable data-paginate="8">
+            <thead><tr><th>ID</th><th>Name</th><th>Roll</th><th>Department</th><th>CGPA</th><th>Email</th><th>Status</th></tr></thead>
+            <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td class="fw-bold">{{ student.full_name }}</td>
+                    <td>{{ student.roll_number }}</td>
+                    <td>{{ student.department }}</td>
+                    <td>{{ student.cgpa }}</td>
+                    <td>{{ student.user.email }}</td>
+                    <td><span class="status-badge {{ 'status-selected' if student.is_placed else 'status-applied' }}">{{ "Placed" if student.is_placed else "Open" }}</span></td>
+                </tr>
+            {% else %}
+                <tr><td colspan="7">{% set title = "No students found" %}{% set message = "Registered students will appear in this directory." %}{% set icon = "bi-people" %}{% set cta_url = url_for('admin.dashboard') %}{% set cta_label = "Back to dashboard" %}{% include "components/empty_state.html" %}</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

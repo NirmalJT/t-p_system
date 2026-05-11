@@ -1,0 +1,30 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}Notifications{% endblock %}
+{% block page_title %}Notifications{% endblock %}
+{% block crumb %}Notifications{% endblock %}
+{% block sidebar %}{% include "student/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+    {% for note in notifications %}
+        <div class="col-lg-6">
+            <div class="portal-card p-4 h-100">
+                <div class="d-flex gap-3">
+                    <span class="metric-icon"><i class="bi bi-bell"></i></span>
+                    <div>
+                        <p class="mb-2">{{ note.message }}</p>
+                        <small class="text-muted">{{ note.status }} · {{ note.created_at.strftime("%d %b %Y %I:%M %p") }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {% set title = "No notifications yet" %}
+        {% set message = "Application updates and interview messages will appear here." %}
+        {% set icon = "bi-bell" %}
+        {% set cta_url = url_for('student.dashboard') %}
+        {% set cta_label = "Back to dashboard" %}
+        {% include "components/empty_state.html" %}
+    {% endfor %}
+</div>
+{% endblock %}

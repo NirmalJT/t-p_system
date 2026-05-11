@@ -1,0 +1,40 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}Applications{% endblock %}
+{% block page_title %}Application Review{% endblock %}
+{% block crumb %}Applications{% endblock %}
+{% block sidebar %}{% include "tpo/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="content-panel">
+    <div class="table-tools">
+        <div><h2 class="h5 mb-1">Student Applications</h2><p class="text-muted mb-0">Review applications and trigger student notifications.</p></div>
+        <div class="input-group" style="max-width: 340px;"><span class="input-group-text"><i class="bi bi-search"></i></span><input class="form-control" type="search" placeholder="Search applications" data-table-search="#tpoApplicationsTable"></div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" id="tpoApplicationsTable" data-sortable data-paginate="8">
+            <thead><tr><th>ID</th><th>Student</th><th>Company</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+            {% for app in applications %}
+                <tr>
+                    <td>{{ app.id }}</td>
+                    <td class="fw-bold">{{ app.student.full_name }}</td>
+                    <td>{{ app.drive.company.name }}</td>
+                    <td>{{ app.drive.role }}</td>
+                    <td>{% set status = app.status %}{% include "components/status_badge.html" %}</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">
+                            <form method="post" action="{{ url_for('tpo.approve', application_id=app.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-success btn-sm" type="submit"><i class="bi bi-check2"></i></button></form>
+                            <form method="post" action="{{ url_for('tpo.reject', application_id=app.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-lg"></i></button></form>
+                            <a href="{{ url_for('tpo.schedule_interview_view', application_id=app.id) }}" class="btn btn-primary btn-sm"><i class="bi bi-calendar-event"></i></a>
+                            <form method="post" action="{{ url_for('tpo.select_student', application_id=app.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-warning btn-sm" type="submit"><i class="bi bi-award"></i></button></form>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="6">{% set title = "No applications found" %}{% set message = "Applications will appear once students apply to placement drives." %}{% set icon = "bi-clipboard-check" %}{% set cta_url = url_for('tpo.add_company') %}{% set cta_label = "Add drive" %}{% include "components/empty_state.html" %}</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

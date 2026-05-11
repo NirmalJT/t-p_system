@@ -1,0 +1,12 @@
+-- The application now uses SQLAlchemy models as the source of truth.
+-- Run this to create the database tables:
+-- flask --app run.py init-db
+
+-- Main tables created by the ORM:
+-- users
+-- student_profiles
+-- companies
+-- placement_drives
+-- applications
+-- interviews
+-- notifications

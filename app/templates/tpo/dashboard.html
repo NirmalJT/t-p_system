@@ -1,0 +1,34 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}TPO Dashboard{% endblock %}
+{% block page_title %}TPO Dashboard{% endblock %}
+{% block crumb %}TPO{% endblock %}
+{% block sidebar %}{% include "tpo/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+    <div class="col-md-6"><div class="metric-card p-3 h-100"><div class="d-flex justify-content-between"><div><p class="text-muted mb-1">Total Drives</p><h2 data-counter="{{ total_drives }}">0</h2></div><span class="metric-icon"><i class="bi bi-building"></i></span></div></div></div>
+    <div class="col-md-6"><div class="metric-card p-3 h-100"><div class="d-flex justify-content-between"><div><p class="text-muted mb-1">Applications</p><h2 data-counter="{{ total_applications }}">0</h2></div><span class="metric-icon"><i class="bi bi-clipboard-check"></i></span></div></div></div>
+</div>
+<div class="row g-3">
+    <div class="col-lg-8">
+        <div class="content-panel h-100">
+            <span class="section-eyebrow">Placement Operations</span>
+            <h2 class="h4 mt-2">Manage recruitment workflows with confidence.</h2>
+            <div class="row g-3 mt-2">
+                <div class="col-md-4"><div class="portal-card p-3 h-100"><i class="bi bi-plus-circle text-primary h3"></i><h3 class="h6">Create Drive</h3><p class="small text-muted mb-0">Publish roles, package, and eligibility.</p></div></div>
+                <div class="col-md-4"><div class="portal-card p-3 h-100"><i class="bi bi-check2-square text-primary h3"></i><h3 class="h6">Review</h3><p class="small text-muted mb-0">Approve, reject, or select students.</p></div></div>
+                <div class="col-md-4"><div class="portal-card p-3 h-100"><i class="bi bi-calendar-event text-primary h3"></i><h3 class="h6">Schedule</h3><p class="small text-muted mb-0">Send interview details through notifications.</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="content-panel h-100">
+            <span class="section-eyebrow">Quick Actions</span>
+            <div class="d-grid gap-2 mt-3">
+                <a href="{{ url_for('tpo.add_company') }}" class="btn btn-primary"><i class="bi bi-plus-circle me-2"></i>Add Placement Drive</a>
+                <a href="{{ url_for('tpo.view_applications') }}" class="btn btn-soft"><i class="bi bi-clipboard-check me-2"></i>View Applications</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

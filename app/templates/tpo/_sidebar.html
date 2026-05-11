@@ -1,0 +1,3 @@
+<a class="{{ 'active' if request.endpoint == 'tpo.dashboard' else '' }}" href="{{ url_for('tpo.dashboard') }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+<a class="{{ 'active' if request.endpoint == 'tpo.add_company' else '' }}" href="{{ url_for('tpo.add_company') }}"><i class="bi bi-plus-circle"></i> Add Drive</a>
+<a class="{{ 'active' if request.endpoint == 'tpo.view_applications' else '' }}" href="{{ url_for('tpo.view_applications') }}"><i class="bi bi-clipboard-check"></i> Applications</a>

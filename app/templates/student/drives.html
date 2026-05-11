@@ -1,0 +1,52 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}Placement Drives{% endblock %}
+{% block page_title %}Available Placement Drives{% endblock %}
+{% block crumb %}Drives{% endblock %}
+{% block sidebar %}{% include "student/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="table-tools">
+    <div class="input-group" style="max-width: 360px;">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input class="form-control" type="search" placeholder="Search company, role, department" data-table-search="#drivesGrid">
+    </div>
+    <a class="btn btn-soft" href="{{ url_for('student.applications') }}"><i class="bi bi-send me-1"></i>My Applications</a>
+</div>
+<div class="row g-3" id="drivesGrid">
+    {% for drive in drives %}
+        <div class="col-md-6 col-xl-4">
+            <div class="portal-card p-4 h-100">
+                <div class="d-flex justify-content-between gap-3 mb-3">
+                    <div>
+                        <h2 class="h5 mb-1">{{ drive.company.name }}</h2>
+                        <p class="text-muted mb-0">{{ drive.role }}</p>
+                    </div>
+                    <span class="metric-icon"><i class="bi bi-building"></i></span>
+                </div>
+                <div class="d-grid gap-2 small mb-3">
+                    <div><i class="bi bi-currency-rupee text-primary me-2"></i><strong>Package:</strong> {{ drive.package }}</div>
+                    <div><i class="bi bi-award text-primary me-2"></i><strong>Minimum CGPA:</strong> {{ drive.min_cgpa }}</div>
+                    <div><i class="bi bi-diagram-3 text-primary me-2"></i><strong>Department:</strong> {{ drive.department }}</div>
+                </div>
+                {% if drive.id in applied_drive_ids %}
+                    <button class="btn btn-secondary w-100" disabled><i class="bi bi-check2-circle me-1"></i>Already Applied</button>
+                {% elif current_user.student_profile.is_placed %}
+                    <button class="btn btn-secondary w-100" disabled><i class="bi bi-award me-1"></i>Already Placed</button>
+                {% else %}
+                    <form method="post" action="{{ url_for('student.apply', drive_id=drive.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button class="btn btn-success w-100" type="submit"><i class="bi bi-send-check me-1"></i>Apply Now</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        {% set title = "No open drives yet" %}
+        {% set message = "Placement drives published by the TPO office will appear here." %}
+        {% set icon = "bi-building" %}
+        {% set cta_url = url_for('student.dashboard') %}
+        {% set cta_label = "Back to dashboard" %}
+        {% include "components/empty_state.html" %}
+    {% endfor %}
+</div>
+{% endblock %}

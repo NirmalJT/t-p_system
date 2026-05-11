@@ -1,0 +1,139 @@
+<style>
+    .portal-footer {
+        background: #0f172a; /* Slate 900 - much cleaner than standard black */
+        color: #94a3b8; /* Slate 400 for secondary text */
+        padding: 80px 0 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+    }
+
+    /* Subtle background glow for depth */
+    .portal-footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 10%;
+        width: 150px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    }
+
+    .footer-brand-text strong {
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+    }
+
+    .footer-heading {
+        color: #f8fafc !important;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-link-group a {
+        color: #94a3b8;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-block;
+        padding: 4px 0;
+    }
+
+    .footer-link-group a:hover {
+        color: #ffffff;
+        transform: translateX(5px);
+    }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f8fafc;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .social-icon:hover {
+        background: #2563eb;
+        color: white;
+        transform: translateY(-3px);
+    }
+
+    .copyright-bar {
+        margin-top: 60px;
+        padding-top: 25px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 0.8rem;
+    }
+</style>
+
+<footer class="portal-footer">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <!-- Brand Section -->
+            <div class="col-lg-5">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/as/4/42/Gauhati_university_logo.jpg" 
+                         alt="GU Logo" width="50" height="50" 
+                         style="border-radius: 10px; filter: grayscale(1) brightness(2);">
+                    <div class="footer-brand-text">
+                        <strong class="text-white d-block">GUIST Placement</strong>
+                        <span class="small opacity-75">Institute of Science & Technology</span>
+                    </div>
+                </div>
+                <p class="mb-4 pe-lg-5" style="line-height: 1.7;">
+                    Empowering the next generation of engineers and technologists at Gauhati University. 
+                    Our portal bridges the gap between academic excellence and career aspirations.
+                </p>
+                <div class="d-flex gap-2">
+                    <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-github"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-globe"></i></a>
+                </div>
+            </div>
+
+            <!-- Links Section -->
+            <div class="col-6 col-lg-3">
+                <h2 class="footer-heading">Platform</h2>
+                <div class="footer-link-group d-grid gap-2">
+                    <a href="{{ url_for('main.home') }}">Home</a>
+                    <a href="{{ url_for('auth.student_login') }}">Student Portal</a>
+                    <a href="{{ url_for('auth.tpo_login') }}">TPO Management</a>
+                    <a href="{{ url_for('auth.admin_login') }}">System Admin</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="col-6 col-lg-4">
+                <h2 class="footer-heading">Inquiries</h2>
+                <div class="d-grid gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-primary-subtle text-primary rounded-circle p-2" style="--bs-bg-opacity: 0.1;">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <span class="small">GUIST, Gauhati University, <br>Jalukbari, Guwahati, 781014</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-primary-subtle text-primary rounded-circle p-2" style="--bs-bg-opacity: 0.1;">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <span class="small">placement@guist.ac.in</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="copyright-bar text-center text-lg-start d-lg-flex justify-content-between align-items-center">
+            <p class="mb-0">&copy; 2026 GUIST Training & Placement Cell. All rights reserved.</p>
+            <p class="mb-0 opacity-50 small mt-2 mt-lg-0">Designed for GUIST Tech Ecosystem</p>
+        </div>
+    </div>
+</footer>

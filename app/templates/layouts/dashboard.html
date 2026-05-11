@@ -1,0 +1,154 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+<style>
+    :root {
+        --sidebar-bg: #0f172a;
+        --sidebar-accent: #1e293b;
+        --primary-blue: #3b82f6;
+        --canvas-bg: #f1f5f9;
+        --text-main: #334155;
+    }
+
+    body {
+        background-color: var(--canvas-bg);
+        color: var(--text-main);
+        font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    /* Sidebar - The "Pro" Look */
+    .sidebar {
+        width: 280px;
+        background-color: var(--sidebar-bg);
+        min-height: 100vh;
+        position: sticky;
+        top: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-right: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-link-custom {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        color: #94a3b8;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        transition: 0.2s;
+    }
+
+    .nav-link-custom:hover {
+        background: var(--sidebar-accent);
+        color: #fff;
+    }
+
+    .nav-link-custom.active {
+        background: var(--primary-blue);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Main Content Area */
+    .main-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .top-toolbar {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid #e2e8f0;
+        padding: 1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    /* The "Sheet" Look for Content */
+    .content-canvas {
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .glass-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 10px 15px -3px rgba(0,0,0,0.03);
+    }
+
+    .breadcrumb-custom {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+    }
+</style>
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <aside class="sidebar d-none d-lg-flex flex-column p-3">
+        <div class="d-flex align-items-center gap-2 px-2 mb-4 mt-2">
+            <img src="https://upload.wikimedia.org/wikipedia/as/4/42/Gauhati_university_logo.jpg" 
+                 alt="GU Logo" width="35" height="35" class="rounded">
+            <div class="lh-1">
+                <div class="text-white fw-bold small">GUIST PORTAL</div>
+                <small class="text-muted" style="font-size: 0.65rem;">{{ current_user.role|upper }} WORKSPACE</small>
+            </div>
+        </div>
+
+        <nav class="flex-grow-1">
+            <div class="text-muted small fw-bold mb-2 px-2" style="font-size: 0.7rem;">MANAGEMENT</div>
+            {% block sidebar %}{% endblock %}
+            
+            <div class="border-top border-secondary border-opacity-25 mt-4 pt-4">
+                <div class="text-muted small fw-bold mb-2 px-2" style="font-size: 0.7rem;">SETTINGS</div>
+                <a href="{{ url_for('main.home') }}" class="nav-link-custom"><i class="bi bi-house"></i> Home</a>
+                <form method="post" action="{{ url_for('auth.logout') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="nav-link-custom border-0 w-100 bg-transparent text-danger fw-bold">
+                        <i class="bi bi-box-arrow-right"></i> Sign Out
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Content -->
+    <div class="main-wrapper">
+        <header class="top-toolbar">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="breadcrumb-custom mb-1">Overview / {% block crumb %}Dashboard{% endblock %}</div>
+                    <h1 class="h4 fw-bold mb-0 text-dark">{% block page_title %}Workspace{% endblock %}</h1>
+                </div>
+                
+                <div class="d-flex gap-2">
+                    <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="history.back()">
+                        <i class="bi bi-arrow-left"></i>
+                    </button>
+                    <a href="#" class="btn btn-sm btn-primary rounded-pill px-4 fw-bold shadow-sm">
+                        Refresh <i class="bi bi-arrow-clockwise ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-canvas">
+            {% include "layouts/flash.html" %}
+            
+            <!-- Actual Content goes into a clean white card -->
+            <div class="glass-card p-4">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

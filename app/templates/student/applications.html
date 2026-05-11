@@ -1,0 +1,37 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}My Applications{% endblock %}
+{% block page_title %}My Applications{% endblock %}
+{% block crumb %}Applications{% endblock %}
+{% block sidebar %}{% include "student/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="content-panel">
+    <div class="table-tools">
+        <div>
+            <h2 class="h5 mb-1">Application Status</h2>
+            <p class="text-muted mb-0">Track every company you have applied to.</p>
+        </div>
+        <div class="input-group" style="max-width: 330px;">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input class="form-control" type="search" placeholder="Search applications" data-table-search="#applicationsTable">
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" id="applicationsTable" data-sortable data-paginate="8">
+            <thead><tr><th>Company</th><th>Role</th><th>Status</th><th>Applied At</th></tr></thead>
+            <tbody>
+            {% for app in applications %}
+                <tr>
+                    <td class="fw-bold">{{ app.drive.company.name }}</td>
+                    <td>{{ app.drive.role }}</td>
+                    <td>{% set status = app.status %}{% include "components/status_badge.html" %}</td>
+                    <td>{{ app.applied_at.strftime("%d %b %Y") }}</td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4">{% set title = "No applications yet" %}{% set message = "Browse placement drives and apply when you are eligible." %}{% set icon = "bi-send" %}{% set cta_url = url_for('student.drives') %}{% set cta_label = "View drives" %}{% include "components/empty_state.html" %}</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

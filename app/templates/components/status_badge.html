@@ -1,0 +1,10 @@
+{% set normalized = status|lower %}
+<span class="status-badge status-{{ normalized }}">
+    {% if normalized == "applied" %}<i class="bi bi-send-check me-1"></i>
+    {% elif normalized == "approved" %}<i class="bi bi-check-circle me-1"></i>
+    {% elif normalized == "rejected" %}<i class="bi bi-x-circle me-1"></i>
+    {% elif normalized == "scheduled" %}<i class="bi bi-calendar-event me-1"></i>
+    {% elif normalized == "selected" %}<i class="bi bi-award me-1"></i>
+    {% endif %}
+    {{ status }}
+</span>

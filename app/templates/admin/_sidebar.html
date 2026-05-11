@@ -1,0 +1,3 @@
+<a class="{{ 'active' if request.endpoint == 'admin.dashboard' else '' }}" href="{{ url_for('admin.dashboard') }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+<a class="{{ 'active' if request.endpoint == 'admin.manage_students' else '' }}" href="{{ url_for('admin.manage_students') }}"><i class="bi bi-people"></i> Manage Students</a>
+<a class="{{ 'active' if request.endpoint == 'admin.reports' else '' }}" href="{{ url_for('admin.reports') }}"><i class="bi bi-graph-up-arrow"></i> Reports</a>

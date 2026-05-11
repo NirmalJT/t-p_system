@@ -1,0 +1,38 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}My Interviews{% endblock %}
+{% block page_title %}My Interviews{% endblock %}
+{% block crumb %}Interviews{% endblock %}
+{% block sidebar %}{% include "student/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="content-panel">
+    <div class="table-tools">
+        <div>
+            <h2 class="h5 mb-1">Interview Schedule</h2>
+            <p class="text-muted mb-0">Upcoming and completed interview rounds.</p>
+        </div>
+        <div class="input-group" style="max-width: 330px;">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input class="form-control" type="search" placeholder="Search interviews" data-table-search="#interviewsTable">
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" id="interviewsTable" data-sortable data-paginate="8">
+            <thead><tr><th>Company</th><th>Date</th><th>Time</th><th>Venue</th><th>Status</th></tr></thead>
+            <tbody>
+            {% for interview in interviews %}
+                <tr>
+                    <td class="fw-bold">{{ interview.application.drive.company.name }}</td>
+                    <td>{{ interview.interview_date }}</td>
+                    <td>{{ interview.interview_time }}</td>
+                    <td>{{ interview.venue }}</td>
+                    <td>{% set status = interview.status %}{% include "components/status_badge.html" %}</td>
+                </tr>
+            {% else %}
+                <tr><td colspan="5">{% set title = "No interviews scheduled" %}{% set message = "When the TPO office schedules an interview, it will be visible here." %}{% set icon = "bi-calendar-check" %}{% set cta_url = url_for('student.applications') %}{% set cta_label = "View applications" %}{% include "components/empty_state.html" %}</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

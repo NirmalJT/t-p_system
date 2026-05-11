@@ -1,0 +1,169 @@
+<style>
+    /* 1. Floating Glass Effect */
+    .portal-topbar {
+        background: rgba(255, 255, 255, 0.8) !important;
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 0.75rem 0;
+        transition: all 0.3s ease;
+    }
+
+    /* 2. Advanced Typography for Brand */
+    .brand-title {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+    }
+
+    .brand-title strong {
+        font-family: 'Inter', sans-serif;
+        font-weight: 800;
+        font-size: 1.15rem;
+        letter-spacing: -0.02em;
+        color: #0f172a; /* Slate 900 */
+    }
+
+    .brand-title span {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #64748b; /* Slate 500 */
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    /* 3. Refined Nav Links */
+    .navbar-nav .nav-link {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #475569 !important; /* Slate 600 */
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #2563eb !important; /* Modern Blue */
+        background: rgba(37, 99, 235, 0.05);
+    }
+
+    /* 4. Action Buttons */
+    .btn-register-nav {
+        background: #0f172a;
+        color: white !important;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 8px 20px !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    .btn-register-nav:hover {
+        background: #1e293b;
+        transform: translateY(-1px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 5. Custom Dropdown */
+    .dropdown-menu {
+        border: 1px solid rgba(0,0,0,0.05);
+        box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        border-radius: 12px;
+        padding: 0.75rem;
+        margin-top: 10px;
+    }
+
+    .dropdown-item {
+        border-radius: 6px;
+        font-weight: 500;
+        padding: 0.6rem 1rem;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8fafc;
+        color: #2563eb;
+    }
+
+    /* Sidebar Toggle Button (Mobile) */
+    .btn-soft {
+        background: #f1f5f9;
+        border-radius: 10px;
+        color: #475569;
+        border: none;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg sticky-top portal-topbar">
+    <div class="container-fluid px-3 px-lg-5">
+        <!-- Sidebar Toggle for Mobile -->
+        <button class="btn btn-soft d-lg-none me-3" type="button" data-sidebar-toggle>
+            <i class="bi bi-text-left fs-4"></i>
+        </button>
+
+        <a class="navbar-brand d-flex align-items-center gap-3" href="{{ url_for('main.home') }}">
+            <div class="brand-logo-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/as/4/42/Gauhati_university_logo.jpg" 
+                     alt="GU Logo" width="45" height="45" style="border-radius: 8px;">
+            </div>
+            <div class="brand-title">
+                <strong>GUIST Placement</strong>
+                <span>Training & Placement Cell</span>
+            </div>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#portalNavbar">
+            <i class="bi bi-grid-fill text-dark"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="portalNavbar">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.home') }}">
+                        <i class="bi bi-house-door-fill me-1 opacity-50"></i> Home
+                    </a>
+                </li>
+
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% if current_user.role == 'admin' %}{{ url_for('admin.dashboard') }}{% elif current_user.role == 'tpo' %}{{ url_for('tpo.dashboard') }}{% else %}{{ url_for('student.dashboard') }}{% endif %}">
+                            <i class="bi bi-speedometer2 me-1 opacity-50"></i> Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown ms-lg-2">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown">
+                            <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <span class="fw-bold">{{ current_user.role|title }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end animate slideIn">
+                            <div class="dropdown-header text-uppercase small ls-1 fw-bold text-muted">Account Settings</div>
+                            {% if current_user.role == "student" %}
+                                <li><a class="dropdown-item" href="{{ url_for('student.profile') }}"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('student.notifications') }}"><i class="bi bi-bell me-2"></i> Notifications</a></li>
+                            {% endif %}
+                            <li><button class="dropdown-item" type="button" data-dark-toggle><i class="bi bi-moon-stars me-2"></i> Dark Mode</button></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="post" action="{{ url_for('auth.logout') }}">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button class="dropdown-item text-danger fw-bold" type="submit">
+                                        <i class="bi bi-box-arrow-right me-2"></i> Sign Out
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.student_login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-register-nav ms-lg-3" href="{{ url_for('auth.register') }}">Get Started</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

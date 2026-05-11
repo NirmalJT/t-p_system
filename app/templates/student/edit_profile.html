@@ -1,0 +1,26 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}Edit Profile{% endblock %}
+{% block page_title %}Edit Profile{% endblock %}
+{% block crumb %}Edit Profile{% endblock %}
+{% block sidebar %}{% include "student/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="content-panel">
+    <form method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="row g-3">
+            {% for field in [form.full_name, form.department, form.cgpa, form.phone] %}
+                <div class="col-md-6">
+                    {{ field.label(class="form-label") }}
+                    {{ field(class="form-control") }}
+                    {% include "layouts/_form_errors.html" %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="mt-4 d-flex gap-2">
+            {{ form.submit(class="btn btn-primary") }}
+            <a class="btn btn-soft" href="{{ url_for('student.profile') }}">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

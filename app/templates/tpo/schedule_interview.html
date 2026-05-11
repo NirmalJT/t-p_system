@@ -1,0 +1,39 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}Schedule Interview{% endblock %}
+{% block page_title %}Schedule Interview{% endblock %}
+{% block crumb %}Schedule{% endblock %}
+{% block sidebar %}{% include "tpo/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+    <div class="col-lg-7">
+        <div class="content-panel">
+            <form method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="row g-3">
+                    {% for field in [form.interview_date, form.interview_time, form.venue] %}
+                        <div class="{{ 'col-md-6' if loop.index < 3 else 'col-12' }}">
+                            {{ field.label(class="form-label") }}
+                            {{ field(class="form-control") }}
+                            {% include "layouts/_form_errors.html" %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="mt-4 d-flex gap-2">
+                    {{ form.submit(class="btn btn-primary") }}
+                    <a class="btn btn-soft" href="{{ url_for('tpo.view_applications') }}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="content-panel h-100">
+            <span class="section-eyebrow">Application Context</span>
+            <h2 class="h5 mt-2">{{ application.student.full_name }}</h2>
+            <p class="text-muted">{{ application.drive.company.name }} · {{ application.drive.role }}</p>
+            {% set status = application.status %}{% include "components/status_badge.html" %}
+            <div class="alert alert-info mt-4 mb-0"><i class="bi bi-info-circle me-2"></i>The student receives a notification after scheduling.</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

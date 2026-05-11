@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+{% block title %}Page Not Found{% endblock %}
+{% block body %}
+{% include "components/topbar.html" %}
+<main class="auth-page">
+    <div class="container">
+        <div class="content-panel text-center mx-auto" style="max-width: 620px;">
+            <i class="bi bi-compass display-4 text-primary"></i>
+            <h1 class="h3 mt-3">Page not found</h1>
+            <p class="text-muted">The page may have moved, but you can always return home or your dashboard.</p>
+            <button class="btn btn-soft" onclick="history.back()">Back</button>
+            <a class="btn btn-primary" href="{{ url_for('main.home') }}">Home</a>
+        </div>
+    </div>
+</main>
+{% include "components/footer.html" %}
+{% endblock %}

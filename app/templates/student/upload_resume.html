@@ -1,0 +1,34 @@
+{% extends "layouts/dashboard.html" %}
+{% block title %}Upload Resume{% endblock %}
+{% block page_title %}Upload Resume{% endblock %}
+{% block crumb %}Resume{% endblock %}
+{% block sidebar %}{% include "student/_sidebar.html" %}{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+    <div class="col-lg-7">
+        <div class="content-panel">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="border border-2 border-dashed rounded-4 p-4 text-center bg-light">
+                    <i class="bi bi-file-earmark-pdf text-primary display-5"></i>
+                    <h2 class="h5 mt-3">Upload your latest resume</h2>
+                    <p class="text-muted">Only PDF files are accepted. Keep it updated before applying.</p>
+                    {{ form.resume(class="form-control", accept="application/pdf") }}
+                    {% set field = form.resume %}
+                    {% include "layouts/_form_errors.html" %}
+                </div>
+                {{ form.submit(class="btn btn-primary mt-3") }}
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="content-panel h-100">
+            <span class="section-eyebrow">Resume Checklist</span>
+            <div class="timeline-step mt-3"><span class="timeline-dot"><i class="bi bi-check"></i></span><div><strong>Single PDF</strong><div class="small text-muted">Avoid multiple files or images.</div></div></div>
+            <div class="timeline-step mt-3"><span class="timeline-dot"><i class="bi bi-check"></i></span><div><strong>Updated CGPA</strong><div class="small text-muted">Match your profile information.</div></div></div>
+            <div class="timeline-step mt-3"><span class="timeline-dot"><i class="bi bi-check"></i></span><div><strong>Project Highlights</strong><div class="small text-muted">Add relevant academic and technical projects.</div></div></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

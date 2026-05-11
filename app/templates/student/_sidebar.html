@@ -1,0 +1,7 @@
+<a class="{{ 'active' if request.endpoint == 'student.dashboard' else '' }}" href="{{ url_for('student.dashboard') }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+<a class="{{ 'active' if request.endpoint == 'student.profile' else '' }}" href="{{ url_for('student.profile') }}"><i class="bi bi-person-badge"></i> Profile</a>
+<a class="{{ 'active' if request.endpoint == 'student.upload_resume' else '' }}" href="{{ url_for('student.upload_resume') }}"><i class="bi bi-file-earmark-arrow-up"></i> Upload Resume</a>
+<a class="{{ 'active' if request.endpoint == 'student.drives' else '' }}" href="{{ url_for('student.drives') }}"><i class="bi bi-building"></i> Placement Drives</a>
+<a class="{{ 'active' if request.endpoint == 'student.applications' else '' }}" href="{{ url_for('student.applications') }}"><i class="bi bi-send"></i> Applications</a>
+<a class="{{ 'active' if request.endpoint == 'student.my_interviews' else '' }}" href="{{ url_for('student.my_interviews') }}"><i class="bi bi-calendar-check"></i> My Interviews</a>
+<a class="{{ 'active' if request.endpoint == 'student.notifications' else '' }}" href="{{ url_for('student.notifications') }}"><i class="bi bi-bell"></i> Notifications{% if unread is defined %}<span class="badge text-bg-light ms-auto">{{ unread }}</span>{% endif %}</a>

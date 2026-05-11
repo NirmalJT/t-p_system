@@ -1,0 +1,228 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}GUIST Training & Placement Cell{% endblock %}
+
+{% block body %}
+{% include "components/topbar.html" %}
+
+<section class="landing-hero" style="
+    min-height: 90vh; 
+    background: radial-gradient(circle at top left, #1e293b, #0f172a); 
+    display: flex; 
+    align-items: center; 
+    padding: 100px 0; 
+    position: relative; 
+    overflow: hidden; 
+    color: white;">
+
+    <!-- Background Decorative Glow -->
+    <div style="position: absolute; top: -10%; right: -10%; width: 400px; height: 400px; background: #3b82f6; filter: blur(150px); opacity: 0.15;"></div>
+
+    <div class="container" style="position: relative; z-index: 2;">
+        {% include "layouts/flash.html" %}
+        <div class="row align-items-center g-5">
+            
+            <!-- Left Side: Content -->
+            <div class="col-lg-7">
+                <span class="badge rounded-pill mb-3 px-3 py-2" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); letter-spacing: 0.5px; font-weight: 500;">
+                    GAUHATI UNIVERSITY INSTITUTE OF SCIENCE & TECHNOLOGY
+                </span>
+                
+                <h1 class="display-3 fw-bold mb-4" style="letter-spacing: -0.04em; line-height: 1.1;">
+                    The Next Gen <br>
+                    <span style="background: linear-gradient(to right, #60a5fa, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Placement Ecosystem.</span>
+                </h1>
+                
+                <p class="lead mb-5 opacity-75" style="font-size: 1.2rem; max-width: 600px; line-height: 1.6;">
+                    A unified workspace to track drives, manage applications, and view real-time analytics. Built specifically for the GUIST technical community.
+                </p>
+                
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ url_for('auth.student_login') }}" class="btn btn-light px-4 py-3 fw-bold shadow-lg" style="border-radius: 12px; transition: 0.3s;">
+                        <i class="bi bi-mortarboard-fill me-2"></i> Student Access
+                    </a>
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-outline-light px-4 py-3 fw-bold" style="border-radius: 12px; border-width: 2px;">
+                        Join the Portal
+                    </a>
+                    <a href="{{ url_for('auth.tpo_login') }}" class="btn btn-link text-white text-decoration-none fw-semibold d-flex align-items-center">
+                        TPO Officer Portal <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side: The Glass Panel -->
+            <div class="col-lg-5">
+                <div class="hero-panel" style="
+                    background: rgba(255, 255, 255, 0.03); 
+                    backdrop-filter: blur(15px); 
+                    border: 1px solid rgba(255, 255, 255, 0.1); 
+                    border-radius: 30px; 
+                    padding: 40px; 
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+                    
+                    <div class="d-flex align-items-center gap-3 mb-5">
+                        <img src="https://upload.wikimedia.org/wikipedia/as/4/42/Gauhati_university_logo.jpg" 
+                             alt="GU Logo" width="50" height="50" 
+                             style="border-radius: 10px; filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));">
+                        <div>
+                            <div class="fw-bold text-white fs-5">Live Stats</div>
+                            <small class="text-info fw-semibold" style="letter-spacing: 1px;">BATCH OF 2026</small>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <!-- Stat Item -->
+                        <div class="col-6">
+                            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 20px;">
+                                <h2 class="h3 fw-800 mb-1 text-white" data-counter="500">500+</h2>
+                                <small style="color: #94a3b8; text-transform: uppercase; font-size: 0.7rem; font-weight: 700;">Students</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 20px;">
+                                <h2 class="h3 fw-800 mb-1 text-white" data-counter="120">120+</h2>
+                                <small style="color: #94a3b8; text-transform: uppercase; font-size: 0.7rem; font-weight: 700;">Companies</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 20px;">
+                                <h2 class="h3 fw-800 mb-1 text-white" data-counter="92">92%</h2>
+                                <small style="color: #94a3b8; text-transform: uppercase; font-size: 0.7rem; font-weight: 700;">Hired</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 20px;">
+                                <h2 class="h3 fw-800 mb-1 text-white" data-counter="45">45+</h2>
+                                <small style="color: #94a3b8; text-transform: uppercase; font-size: 0.7rem; font-weight: 700;">Drives</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <a href="{{ url_for('auth.admin_login') }}" class="btn btn-primary w-100 py-3 fw-bold d-flex align-items-center justify-content-center shadow" style="border-radius: 12px; background: #2563eb; border: none;">
+                            <i class="bi bi-shield-lock-fill me-2"></i> Administrative Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background: #f8fafc;">
+    <div class="container py-lg-4">
+        <div class="row g-5 align-items-center">
+            <!-- TPO Card with Professional Depth -->
+            <div class="col-lg-4">
+                <div class="p-4 text-center shadow-sm" style="background: white; border-radius: 24px; border: 1px solid #e2e8f0;">
+                    <div class="mb-3">
+                        <img src="https://gauhati.ac.in/media/people/1659410338.jpg" 
+                             alt="TPO Head" width="100" height="100" 
+                             style="border-radius: 20px; object-fit: cover; border: 4px solid #f1f5f9;">
+                    </div>
+                    <p>Dr. Hiren Kumar Deva Sarma</p>
+                    <h2 class="h5 fw-800 mb-1">Message from TPO</h2>
+                    <p class="text-primary small fw-bold mb-3 text-uppercase" style="letter-spacing: 1px;">Training & Placement Cell</p>
+                    <p class="text-muted small mb-0" style="line-height: 1.6;">"Our vision is to prepare every GUIST student for meaningful industry opportunities through skill development and transparent recruiter relationships."</p>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="col-lg-8">
+                <span class="text-primary fw-bold small text-uppercase ls-2">Placement Cell Vision</span>
+                <h2 class="display-6 fw-bold mt-2 mb-4" style="letter-spacing: -0.02em;">Building confident engineers for <span class="text-primary">global teams.</span></h2>
+                <p class="text-muted mb-5" style="font-size: 1.1rem; line-height: 1.7;">
+                    The GUIST portal bridges the gap between student preparation and recruitment efficiency. 
+                    From automated eligibility checks to real-time drive notifications, we ensure a seamless career transition.
+                </p>
+                
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="p-4 h-100" style="background: rgba(37, 99, 235, 0.03); border-radius: 16px; border: 1px solid rgba(37, 99, 235, 0.1);">
+                            <i class="bi bi-file-earmark-person text-primary fs-3"></i>
+                            <h3 class="h6 mt-3 fw-bold">Profile Readiness</h3>
+                            <p class="small text-muted mb-0">Dynamic resume tracking and skill mapping.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 h-100" style="background: rgba(37, 99, 235, 0.03); border-radius: 16px; border: 1px solid rgba(37, 99, 235, 0.1);">
+                            <i class="bi bi-building-check text-primary fs-3"></i>
+                            <h3 class="h6 mt-3 fw-bold">Drive Management</h3>
+                            <p class="small text-muted mb-0">Centralized recruitment workflows.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 h-100" style="background: rgba(37, 99, 235, 0.03); border-radius: 16px; border: 1px solid rgba(37, 99, 235, 0.1);">
+                            <i class="bi bi-bar-chart-line text-primary fs-3"></i>
+                            <h3 class="h6 mt-3 fw-bold">Analytics</h3>
+                            <p class="small text-muted mb-0">Placement ROI and reporting.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-800" style="letter-spacing: -0.03em;">Trusted by Leading Teams</h2>
+            <div style="width: 50px; height: 3px; background: #2563eb; margin: 15px auto;"></div>
+        </div>
+        <div class="row g-3 justify-content-center">
+            {% for logo in ["TCS", "Infosys", "Wipro", "Accenture", "Capgemini", "TechM"] %}
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="d-flex align-items-center justify-content-center p-4" 
+                         style="background: #ffffff; border: 1px solid #f1f5f9; border-radius: 12px; height: 80px; transition: 0.3s; cursor: default;"
+                         onmouseover="this.style.borderColor='#3b82f6'; this.style.transform='translateY(-5px)';"
+                         onmouseout="this.style.borderColor='#f1f5f9'; this.style.transform='translateY(0)';">
+                        <span class="fw-bold text-muted" style="letter-spacing: 1px;">{{ logo }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background: #f8fafc;">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-4 h-100 shadow-sm" style="background: white; border-radius: 20px; border-bottom: 4px solid #3b82f6;">
+                    <i class="bi bi-quote text-primary opacity-25" style="font-size: 3rem; display: block; margin-top: -20px;"></i>
+                    <p class="mb-4 fw-500" style="color: #475569; line-height: 1.6;">"The portal makes placement communication much clearer and faster for students."</p>
+                    <div class="d-flex align-items-center gap-2">
+                        <div style="width: 30px; height: 30px; background: #e2e8f0; border-radius: 50%;"></div>
+                        <strong class="small text-dark">Final Year Student</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="p-4 h-100 shadow-sm" style="background: white; border-radius: 20px; border-bottom: 4px solid #8b5cf6;">
+                    <i class="bi bi-quote text-primary opacity-25" style="font-size: 3rem; display: block; margin-top: -20px;"></i>
+                    <p class="mb-4 fw-500" style="color: #475569; line-height: 1.6;">"Application review and interview scheduling are all in one organized place."</p>
+                    <div class="d-flex align-items-center gap-2">
+                        <div style="width: 30px; height: 30px; background: #e2e8f0; border-radius: 50%;"></div>
+                        <strong class="small text-dark">TPO Office</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-4 h-100 shadow-sm" style="background: white; border-radius: 20px; border-bottom: 4px solid #10b981;">
+                    <i class="bi bi-quote text-primary opacity-25" style="font-size: 3rem; display: block; margin-top: -20px;"></i>
+                    <p class="mb-4 fw-500" style="color: #475569; line-height: 1.6;">"Detailed reports help us present performance cleanly during administrative reviews."</p>
+                    <div class="d-flex align-items-center gap-2">
+                        <div style="width: 30px; height: 30px; background: #e2e8f0; border-radius: 50%;"></div>
+                        <strong class="small text-dark">Administration</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "components/footer.html" %}
+{% endblock %}

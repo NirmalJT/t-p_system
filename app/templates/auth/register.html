@@ -1,0 +1,66 @@
+{% extends "layouts/auth.html" %}
+
+{% block title %}Student Registration{% endblock %}
+{% block auth_col %}col-lg-8{% endblock %}
+
+{% block auth_content %}
+<div class="auth-card">
+    <div class="row g-4 align-items-center mb-4">
+        <div class="col-md-7">
+            <span class="section-eyebrow">Student Registration</span>
+            <h1 class="h3 fw-bold mt-2">Create your placement profile</h1>
+            <p class="text-muted mb-0">Use accurate academic details because drive eligibility is checked from your profile.</p>
+        </div>
+        <div class="col-md-5">
+            <div class="portal-card p-3">
+                <div class="timeline-step"><span class="timeline-dot">1</span><div><strong>Register</strong><div class="small text-muted">Create account</div></div></div>
+                <div class="timeline-step mt-3"><span class="timeline-dot">2</span><div><strong>Upload Resume</strong><div class="small text-muted">PDF only</div></div></div>
+                <div class="timeline-step mt-3"><span class="timeline-dot">3</span><div><strong>Apply</strong><div class="small text-muted">Eligible drives</div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <form method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="row g-3">
+            <div class="col-md-12">
+                <label class="form-label">{{ form.full_name.label.text }}</label>
+                <div class="input-group"><span class="input-group-text"><i class="bi bi-person"></i></span>{{ form.full_name(class="form-control", placeholder="Full name") }}</div>
+                {% set field = form.full_name %}{% include "layouts/_form_errors.html" %}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">{{ form.roll_number.label.text }}</label>
+                <div class="input-group"><span class="input-group-text"><i class="bi bi-hash"></i></span>{{ form.roll_number(class="form-control", placeholder="Roll number") }}</div>
+                {% set field = form.roll_number %}{% include "layouts/_form_errors.html" %}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">{{ form.cgpa.label.text }}</label>
+                <div class="input-group"><span class="input-group-text"><i class="bi bi-award"></i></span>{{ form.cgpa(class="form-control", placeholder="0.00") }}</div>
+                {% set field = form.cgpa %}{% include "layouts/_form_errors.html" %}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">{{ form.department.label.text }}</label>
+                <div class="input-group"><span class="input-group-text"><i class="bi bi-diagram-3"></i></span>{{ form.department(class="form-control", placeholder="Department") }}</div>
+                {% set field = form.department %}{% include "layouts/_form_errors.html" %}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">{{ form.email.label.text }}</label>
+                <div class="input-group"><span class="input-group-text"><i class="bi bi-envelope"></i></span>{{ form.email(class="form-control", placeholder="student@guist.ac.in") }}</div>
+                {% set field = form.email %}{% include "layouts/_form_errors.html" %}
+            </div>
+            <div class="col-md-12">
+                <label class="form-label">{{ form.password.label.text }}</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    {{ form.password(class="form-control", placeholder="Minimum 8 characters", id="registerPassword") }}
+                    <button class="btn btn-outline-secondary" type="button" data-password-toggle="#registerPassword" aria-label="Show password"><i class="bi bi-eye"></i></button>
+                </div>
+                {% set field = form.password %}{% include "layouts/_form_errors.html" %}
+            </div>
+        </div>
+        <button class="btn btn-primary w-100 py-2 mt-4" type="submit"><i class="bi bi-person-plus me-2"></i>Create Student Profile</button>
+    </form>
+
+    <p class="text-center text-muted small mt-4 mb-0">Already registered? <a href="{{ url_for('auth.student_login') }}" class="fw-bold text-decoration-none">Login here</a></p>
+</div>
+{% endblock %}
